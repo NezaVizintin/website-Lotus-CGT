@@ -1,0 +1,841 @@
+﻿<html>
+<!--
+TODO fix jpc logo clickable area
+TODO fix links for top "keyboard" part
+TODO clickable phone number
+TODO align pictures in "predstavitev" better
+TODO create english version and toggle button with JS'
+-->
+<head>
+	<meta charset="UTF-8">
+	<title>Lotus – CGT</title>
+
+	<!-- Google fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+	<!-- FontAwesome -->
+	<script src="https://kit.fontawesome.com/131ba52c31.js" crossorigin="anonymous"></script>
+
+	<style type="text/css">
+
+		/*---------------*/
+		/* COLORS & BODY */
+		/*---------------*/
+
+		:root {
+  			--gold: #AE8625;
+			--gold-dark: #544012;
+
+			--background: whitesmoke;
+		}
+
+		.white-bg {
+			background: #FFFFFF;
+		}
+
+		.white-bg:hover {
+			background: #EEEEEE;
+		}
+
+		.white-bg:hover:active {
+			background: #DDDDDD;
+		}
+
+		.black-key {
+			background: #000;
+		}
+		.black-key:hover {
+			background: #444;
+		}
+
+		.black-key:hover:active {
+			background: #555;
+		}
+
+		.background-image-1 {
+			background-image: url('assets/_background_5.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			/* opacity: 0.1; */
+		}
+
+		.background-image-2 {
+			background-image: url('assets/_background_1.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			/* opacity: 0.1; */
+		}
+
+		.background-image-3 {
+			background-image: url('assets/_background_2.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			/* opacity: 0.1; */
+		}
+
+		.background-image-4 {
+			background-image: url('assets/_background_3.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			/* opacity: 0.1; */
+		}
+
+		.background-image-5 {
+			background-image: url('assets/_background_4.png');
+			background-repeat: no-repeat;
+			background-position: center;
+			/* opacity: 0.1; */
+		}
+
+		/* Nav buttons */
+		.nav-button>i {
+			color: #000;
+		}
+		.nav-button>i:hover {
+			color: var(--gold);
+		}
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0px;
+            padding: 0px;
+            background: var(--background);
+            color: var(--gold);
+			font-family: "Open Sans";
+			font-size: 22px;
+        }
+
+		b {
+			font-weight: bolder;
+		}
+
+        li > a {
+            color: #ccc; /* blue colors for links too */
+            text-decoration: inherit; /* no underline */
+        }
+
+		.h0 {
+			font-size: 36pt;
+			font-weight: bold;
+		}
+
+		.nowrap {
+			white-space: nowrap;
+		}
+
+		.clickable:hover {
+			cursor: pointer;
+		}
+
+		/*-----------------*/
+		/* TOPBAR & NAVBAR */
+		/*-----------------*/
+
+		.sticky {
+			position: sticky;
+			top: 0px;
+		}
+
+		div#topBar,
+		nav#topNav {
+			display: inline-block;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+		}
+
+		div#topBar>ul.pianoKeyboard {
+			position: relative;
+			display: inline-block;
+			margin: 0px;
+			padding: 0px;
+			cursor: pointer;
+			list-style-type: none;
+		}
+
+		div#topBar>ul.pianoKeyboard li {
+			position: relative;
+			float: left;
+			border-style: solid;
+			border-color: rgba(0, 0, 0, 100);
+			border-width: 0px 1px 0px 1px;
+			border-radius: 0px 0px 0px 0px;
+			color: #ccc;
+			text-align: center;
+		}
+
+		div#topBar>ul.pianoKeyboard li:first-child {
+			border-width: 0px 1px 0px 2px;
+		}
+		div#topBar>ul.pianoKeyboard li:last-child {
+			border-width: 0px 2px 0px 1px;
+		}
+
+		nav#topNav>ul.pianoKeyboard {
+			position: relative;
+			display: inline-block;
+			margin: 0px;
+			padding: 0px;
+			cursor: pointer;
+			list-style-type: none;
+		}
+
+		nav#topNav>ul.pianoKeyboard li {
+			position: relative;
+			float: left;
+			border-style: solid;
+			border-color: rgba(0, 0, 0, 100);
+			border-width: 0px 1px 2px 1px;
+			border-radius: 0 0 6px 6px;
+			color: #ccc;
+			text-align: center;
+		}
+		nav#topNav>ul.pianoKeyboard li:first-child {
+			border-width: 0px 1px 2px 2px;
+		}
+		nav#topNav>ul.pianoKeyboard li:last-child {
+			border-width: 0px 2px 2px 1px;
+		}
+
+		.black-key {
+			z-index: 999;
+			width: 40px;
+			height: 105px;
+			margin: 0 0 0 -21px;
+		}
+
+		.black-key+.white-key {
+			margin-left: -21px;
+		}
+
+		.white-key {
+			z-index: 998;
+			width: 60px;
+			height: 150px;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+		}
+
+		.nav-button {
+			z-index: 997;
+			width: 60px;
+			height: 60px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+		}
+
+		/* Tooltip text */
+		.tooltip .tooltiptext {
+			visibility: hidden;
+			background-color: var(--background);
+			color: var(--gold-dark);
+			font-size: medium;
+			font-weight: bolder;
+			text-align: center;
+			margin-top: 2px;
+			padding: 0px 4px 2px 4px;
+			border-radius: 0px;
+			width: auto;
+			top: 100%;
+			left: 50%;
+
+			-webkit-transform: translateX(-50%);
+			-moz-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+			-o-transform: translateX(-50%);
+			transform: translateX(-50%);
+
+			/* Position the tooltip text - see examples below! */
+			position: absolute;
+			z-index: 1;
+
+			/* animation */
+			opacity: 0;
+			transition: opacity 1s;
+		}
+
+		/* Show the tooltip text when you mouse over the tooltip container */
+		.tooltip:hover .tooltiptext {
+			visibility: visible;
+
+			/* animation */
+			opacity: 1;
+
+		}
+
+		/*--------------*/
+		/* PAGE CONTENT */
+		/*--------------*/
+
+
+
+		div.div-logo {
+			position: absolute; /* Reposition logo from the natural layout */
+			top: 0;
+			display: flex;
+			justify-content: center;
+		}
+		div#logo-lotus {
+			margin-top: 15px;
+			margin-left: 3%;
+			left: 0;
+			height: 200px;
+			width: auto;
+			object-fit: contain;
+		}
+		div#logo-piano-center {
+			margin-right: 5%;
+			height: 300px;
+			right: 0;
+		}
+
+		@media (max-width:1190px) {
+			div#logo-lotus {
+				margin-top: 15px;
+				margin-left: 3%;
+				left: 0;
+				height: 10vw;
+				width: auto;
+			}
+			div#logo-piano-center {
+				margin-right: 5%;
+				right: 0;
+				height: 13vw;
+				width: auto;
+			}
+			image-autoscale {
+				height: 10vw;
+			}
+		}
+
+		.navigation-spacer {
+			margin-bottom: 100px;
+		}
+
+        .margin-lr-20 {
+			line-height: 30px;
+			margin-left: 20px;
+			margin-right: 20px;
+		}
+
+		section.content-80 {
+			width: 80%;
+			margin: auto;
+		}
+
+		section.content-100 {
+			width: 100%;
+			margin: auto;
+		}
+
+		.text-center {
+			text-align:center;
+		}
+
+		/*----------*/
+		/* DIVIDERS */
+		/*----------*/
+
+		div.content-divider {
+			display: flex;
+			justify-content: center;
+		}
+		div.content-divider>hr {
+			clear: both;
+			border: 0px;
+			height: 3px;
+			margin: 30px 0px 30px 0px;
+			width: 90%;
+			background-image: linear-gradient(to right, rgba(174,134,37,0), rgba(174,134,37, 100), rgba(174,134,37,0));
+		}
+
+		.text-bold {
+			font-weight: bold;
+		}
+
+        figure figcaption::before {
+            content: "\2014";
+        }
+
+        dl.dl-nolinebreak {
+            display: grid;
+            grid-template-columns: max-content auto;
+        }
+
+        dl.dl-nolinebreak > dt {
+            grid-column-start: 1;
+        }
+
+        dl.dl-nolinebreak > dd {
+            grid-column-start: 2;
+        }
+
+		ul.ul-horizontal {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+		}
+		ul.ul-horizontal>li {
+			margin-left: 5%;
+		}
+
+		a {
+			color: #AE8625;
+			text-decoration: underline;
+		}
+
+		text.underline {
+			text-decoration: underline;
+		}
+
+        .cenik {
+			line-height: 25px
+        }
+
+	</style>
+</head>
+
+<body>
+	<div id="logo-lotus" class="div-logo">
+		<img src="assets/_glasbena_sola_logo.png" class="logo" alt="Lotus center">
+	</div>
+	<div id="logo-piano-center" class="div-logo clickable">
+		<!--TODO fix jpc logo clickable area-->
+		<img src="assets/_japan_piano_center_logo.png" class="logo" alt="Japan piano center" onclick="window.open('https://www.japanpianocenter.com/','_blank')">
+	</div>
+	<div id="topBar">
+		<ul class="pianoKeyboard">
+			<!--TODO fix links for top "keyboard" part-->
+			<li class="white-key C white-bg"></li>
+			<li class="black-key"></li>
+			<li class="white-key D white-bg" onclick="window.location.href='#topBar'"></li>
+			<li class="black-key"></li>
+			<li class="white-key E white-bg" onclick="window.location.href='#location'"></li>
+			<li class="white-key F white-bg" onclick="window.location.href='#location'"></li>
+			<li class="black-key"></li>
+			<li class="white-key G white-bg" onclick="window.location.href='#program'"></li>
+			<li class="black-key"></li>
+			<li class="white-key A white-bg" onclick="window.location.href='#about'"></li>
+			<li class="black-key"></li>
+			<li class="white-key H white-bg"></li>
+		</ul>
+	</div>
+	<nav id="topNav" class="sticky">
+		<ul class="pianoKeyboard">
+			<li class="nav-button C white-bg tooltip" onclick="window.location.href='#topBar'">
+				<i class="fas fa-home fa-2x"></i>
+				<span class="tooltiptext">DOMOV</span>
+			</li>
+			<li class="nav-button D white-bg tooltip" onclick="window.location.href='#program-navpoint'">
+				<i class="fab fa-itunes-note fa-2x"></i>
+				<span class="tooltiptext">PROGRAM</span>
+			</li>
+			<li class="nav-button E white-bg tooltip" onclick="window.location.href='#zaposleni-navpoint'">
+				<i class="fas fa-user-alt fa-2x"></i>
+				<span class="tooltiptext">MENTORJI</span>
+			</li>
+			<li class="nav-button F white-bg tooltip" onclick="window.location.href='#dogodki-navpoint'">
+				<i class="fas fa-calendar-alt fa-2x" style="color: #444;"></i>
+				<span class="tooltiptext">DOGODKI <br> coming soon</span>
+			</li>
+			<li class="nav-button G white-bg tooltip" onclick="window.location.href='#cenik-navpoint'">
+				<i class="fas fa-shopping-cart fa-2x"></i>
+				<span class="tooltiptext">CENIK</span>
+			</li>
+			<li class="nav-button A white-bg tooltip" onclick="window.location.href='#prijavnica-navpoint'">
+				<i class="fas fa-file-signature fa-2x"></i>
+				<span class="tooltiptext">PRIJAVNICA</span>
+			</li>
+			<li class="nav-button H white-bg tooltip" onclick="window.location.href='#location-navpoint'">
+				<i class="fas fa-phone fa-2x"></i>
+				<span class="tooltiptext">KONTAKT</span>
+			</li>
+		</ul>
+	</nav>
+
+	<div class="navigation-spacer"></div>
+
+<!--
+	<section id=language class="content-80 text-center">
+		<div id="language selector" style="display: flex; justify-content: space-evenly; flex-direction: row;">
+			<img src="assets/_slovenija.png" alt="Slovensko" title="Slovensko" width="5%" height="auto" class="clickable" onclick="window.open('https://www.lotus-cgt.si', '_self')">
+			<img src="assets/_uk.png" alt="English" title="English" width="5%" height="auto" class="clickable" onclick="window.open('https://www.lotus-cgt.eu', '_self')">
+		</div>
+	</section>
+-->
+	<section id=language class="content-80 text-center">
+		<div id="language selector" style="display: flex; justify-content: space-evenly; flex-direction: row;">
+			<text style="font-size: small;">English version is coming soon. Please call us on +386 1 438 47 90 or send us an email (<a href="mailto:lotus-cgt@gmail.com">lotus-cgt@gmail.com</a>) for details.</text>
+		</div>
+	</section>
+
+	<div class="navigation-spacer"></div>
+
+<!--	<iframe width="70%" height="74.75%" style="margin-left: 15%" src="https://www.youtube-nocookie.com/embed/HjgTdRo9QsU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+-->
+
+	<div class="navigation-spacer"></div>
+
+	<section id="home" class="content-80 text-center background-image-1">
+		<text class="h0">LOTUS – CENTER ZA GLASBENE TALENTE</text>
+		<br>
+		<h1>
+			V prostorih Japan piano centra odpiramo <br> LOTUS – CENTER ZA GLASBENE TALENTE
+			<br />
+		</h1>
+		<h3>
+			Center ponuja učenje klavirja na osnovni in srednji stopnji
+		</h3>
+		<br />
+		<p>
+			K vpisu vabimo tako začetnike vseh starosti kot tiste, ki si želijo nadgraditi svoje znanje v okviru ljubiteljskega programa ali profesionalnega razvoja.
+			Program prilagajamo vašim potrebam in željam.
+			<br />
+			<br />
+			Odpiramo pripravljalni program – pripravnico, kjer sprejemamo otroke stare od 4 do 6 let.
+			<br />
+			Tu se bodo otroci v majhnih skupinah (do 6 otrok) seznanili s petjem, glasbenimi osnovami klavirja in razvijali kreativnost.
+			<br />
+			Posebnost učenja za osnovno stopnjo izobraževanja je pouk nauka o glasbi, ki je do 4. razreda vključen v čas individualnega pouka klavirja.
+			<br />
+			Za srednješolski nivo prilagodimo pouk teoretičnih predmetov glede na posameznega kandidata in njegove potrebe.
+			<br />
+			Pouk individualnega predmeta lahko poteka v slovenskem, hrvaškem, nemškem, angleškem ali francoskem jeziku.
+			<br />
+			<br />
+			LOTUS – Center za glasbene talente želi približati glasbeni svet čim večjemu številu otrok in odraslih.
+			<br />
+			Skupaj bomo našli pot, da igranje klavirje postane vsakodnevno veselje in radost.
+			<br />
+			<br />
+			<!--TODO clickable phone number-->
+			Pišite nam na e-naslov: <a href="mailto:lotus.cgt@gmail.com">lotus.cgt@gmail.com</a> ali pokličite na tel.: <text class="underline">+386 1 438 47 90</text>.
+			<br />
+			Po prejeti prijavi vam sporočimo termin, ko se bomo lahko srečali in se pogovorili o vaših željah ter pričakovanjih.
+			<br />
+			<br />
+			<b>Veselimo se srečanja z vami!</b>
+		</p>
+		<br />
+		<figure>
+			<blockquote>
+				<i>"Za ustvarjanje glasbe uporabljamo zvoke, tako kot uporabljamo besede za ustvarjanje jezika."</i>
+				<br />
+			</blockquote>
+			<text><b>~</b> Frédéric Chopin</text>
+		</figure>
+		<br />
+	</section>
+
+	<div id="program-navpoint" class="content-divider">
+		<hr>
+	</div>
+
+	<section id="program" class="content-80 cenik background-image-4">
+		<h1 class="text-center">PROGRAM</h1>
+		<h3>Glasbena šola – osnovna stopnja</h3>
+		<dl class="dl-nolinebreak">
+			<dt><b>Pripravnica</b> (1×60 minut) – do 6 otrok</dt>
+			<dt><b>1–3 razred</b> (2×45 minut) klavir + NOG</dt>
+			<dt><b>4–6 razred</b> (2×45 minut) klavir + (1×45 minut) NOG</dt>
+			<dt><b>7–9 razred</b> (2×60 minut) klavir + (1×45 minut) NOG</dt>
+		</dl>
+		<p>
+			Po potrebi in dogovoru dodatne priprave iz glasbenega stavka (skupinske ali individualne).<br />
+			Za vpis v srednjo stopnjo nudimo 8-urni seminar – priprave na sprejemni izpit.
+		</p>
+		<br>
+		<h3> Glasbena šola – srednja stopnja</h3>
+		<dl>
+			<dt>
+				<b>1. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(90 minut) osnova glasbenega izraza in oblikoslovje s harmonsko analizo</dd>
+			<dd><i>Predmet poteka skozi celo leto</i></dd>
+
+			<dt>
+				<b>2. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(60 minut) solfeggio</dd>
+			<dd>(60 minut) zgodovina glasbe in klavirska literatura</dd>
+			<dd>(60 minut) komorna igra</dd>
+			<dd>(60 minut) zbor</dd>
+			<dd><i>Predmeti solfeggio, zgodovina glasbe in klavirska literatura ter komorna igra <br> se izvajajo projektno – vsak od njih traja 5 mesecev.</i></dd>
+
+			<dt>
+				<b>3. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(60 minut) solfeggio</dd>
+			<dd>(60 minut) zgodovina glasbe in klavirska literatura</dd>
+			<dd>(60 minut) komorna igra</dd>
+			<dd>(60 minut) harmonija</dd>
+			<dd>(60 minut) akustika/raziskovanje zvoka</dd>
+			<dd>(60 minut) zbor</dd>
+			<dd><i>Predmeti solfeggio, zgodovina glasbe in klavirska literatura, komorna igra, harmonija in akustika <br> se izvajajo projektno – vsak od njih traja 5 mesecev.</i></dd>
+
+			<dt>
+				<b>4. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(60 minut) solfeggio</dd>
+			<dd>(60 minut) zgodovina glasbe in klavirska literatura</dd>
+			<dd>(60 minut) komorna igra</dd>
+			<dd>(60 minut) harmonija</dd>
+			<dd><i>Predmeti solfeggio, zgodovina glasbe in klavirska literatura, komorna igra in harmonija <br> se izvajajo projektno – vsak od njih traja 5 mesecev.</i></dd>
+		</dl>
+
+		<aside>
+			<strong>Po potrebi dodatne priprave za sprejemne preizkuse na glasbenih akademijah.</strong>
+		</aside>
+
+
+		<h3>Predavanja v obliki seminarjev</h3>
+
+		<ul>
+			<li>priprava na nastop in umetnost nastopanja</li>
+			<li>gostujoči profesorji za individualni pouk klavirja</li>
+			<li>meditacija</li>
+			<li>teme po potrebi</li>
+		</ul>
+
+		<text>Glasbeno-teoretične predmete izvajajo prof. Branimir Rezić, prof. <!--TODO a je res prof. al red. prof. al watevr-->Leon Stefanija in prof. Sašo Vollmaier.</text>
+	</section>
+
+	<div id="zaposleni-navpoint" class="content-divider">
+		<hr>
+	</div>
+
+	<section id="zaposleni" class="content-100">
+		<h1 class="text-center">PREDSTAVITEV ZAPOSLENIH</h1>
+		<!--TODO align the pictures better-->
+		<ul class="ul-horizontal">
+			<li>SUZANA ZORKO</li>
+			<li>BRANIMIR REZIĆ</li>
+			<li>SAŠO VOLLMAIER</li>
+		</ul>
+		<div style="display: flex; justify-content: space-between; flex-direction: row;">
+			<img src="assets/_suzana_zorko.jpg" alt="SUZANA ZORKO" width="50%" height="100%">
+			<p style="margin-right: 5%; margin-left: 5%; text-align:justify;">
+				<strong style="font-size: 28px;">SUZANA ZORKO</strong> je končala študij klavirja na Akademiji za glasbo v Ljubljani. Po končani diplomi se je vrnila na takratno Srednjo glasbeno in baletno šolo (sedanji Konservatorij za glasbo in balet Ljubljana), kjer že 25 let poučuje mlade pianiste na nižji in srednji stopnji.<br /><br />
+				Dolga leta je delovala tudi kot korepetitorica pevcem ter z njimi s svojo umetniško podporo posegala po najvišjih nagradah in priznanjih tako na državnih kot mednarodnih odrih.
+				Leta 2011 je na KGBL prevzela vlogo pomočnice ravnateljice organizacijske enote Glasbena šola Konservatorija za glasbo in balet Ljubljana, kjer deluje kot organizatorica koncertnih dogodkov in izobraževalnih seminarjev v okviru inštitucije in izven nje ter sledi razvoju in rezultatom domačih in tujih tekmovanj.
+				Je urednica dvanajstih CD-jev pri založbi KGBL ter dveh obsežnih zbornikov – <i>60 let Srednje glasbene in baletne šole</i> in <i>Med ljubeznijo in poklicem: 100 let Konservatorija za glasbo in balet Ljubljana.</i><br /><br />
+				Decembra 2018 je bila umetniški vodja 1. Mednarodnega klavirskega  tekmovanja Janez Matičič, zabeleženega kot zelo odmeven dogodek na visoko kvalitetni ravni, ki se bo tradicionalno nadaljeval tudi v prihodnje.
+				Je redna članica strokovnih komisij na klavirskih državnih in mednarodnih tekmovanjih, njeni učenci posegajo po najvišjih nagradah tako na državni kot mednarodni ravni.
+				V prostem času deluje kot predsednica Društva klavirskih pedagogov Slovenije –  EPTA, kjer se zavzema za povezovanje in skupno rast slovenskih klavirskih pedagogov.<br /><br />
+				V septembru 2021 Suzana Zorko odpira vrata glasbene šole <text class="nowrap">LOTUS – Center za glasbene talente</text> v sodelovanju z Japan Piano Centrom, kjer bo lahko z dolgoletnimi pedagoškimi izkušnjami izrazila svojo vizijo – posodabljati učno okolje in vsebine za celostni razvoj mladih glasbenikov od prvih začetkov pa vse do vstopa na glasbene akademije.
+			</p>
+		</div>
+		<div style="display: flex; justify-content: space-between; flex-direction: row;">
+			<div>
+				<p style="margin-right: 5%; margin-left: 5%; text-align:justify;">
+					<strong>BRANIMIR REZIĆ</strong> je skladatelj, dirigent in čembalist, rojen 1989 leta v Zagrebu. Glasbeno pot je pričel v Drnišu z učenjem klavirja, nato pa nadaljeval z izobraževanjem v Glasbeni šoli Ivana Lukačića v Šibeniku, kjer je maturiral na oddelku za glasbeno teorijo. Leta 2007 se je vpisal na oddelek glasbene teorije Umetniške Akademije v Splitu, kjer je leta 2012 pridobi naziv bakalareus glasbene teorije. Istega leta je vpisal magistrski študij na oddelku za sakralno glasbo Akademije za glasbo v Ljubljani – Slovenija (umetniška smer). Specializiral se je za zborovsko dirigiranje pri doc. Sebastijanu Vrhovniku, kompozicijo pa je šrudiral v razredu mr. sc. Ivana Florjanca, kjer je leta 2015 pridobi naziv magister stroke.<br /><br />
+					Trenutno je študent prvega letnika magistrskega študija čembala na oddelku za staro glasbo Akademije za glasbo v Ljubljani, v razredu izrednega profesorja Egona Mihajlovića. Še kot študent na Umetniški Akademiji v Splitu je pokazal veliko ljubezen in zanimanje za kompozicijo. Leta 2011 in 2013 je na 1. in 3. Samoborskem zborovskem protiletju osvojil 2. nagrado za novo zborovsko skladbo (1. nagrada ni bila podeljena). Na XVII. Dnevih duhovne glasbe „CRO PATRIA“ leta 2013 je osvojil nagrado za najboljšo skladbo mladega skladatelja do 30 let (skladba OTČE NAŠ). Prav tako je prejel priznanje na razpisu za nove skladbe na Festivalu duhovne glasbe „CROPATRIA“ – Split 2011 in 2013, priznanja Hrvaškega kulturnega parlamenta …<br /><br />
+					Kot čembalist je sodeloval na različnih umetniških projektih:
+				</p>
+				<ul style="margin-right: 10%; margin-left: 5%">
+					<li>Les Fêtes Musicales de Versailes, baročni orkester Akademije za glasbo u Ljubljani, kot asistent dirigenta in kontinuista 2013. (M. R. Delalonde, M. A. Charpentier, M. Lambert)</li>
+					<li>C. Monteverdi: Vesperae della beata Mariae virginis, asistent dirigenta in kontinuista 2015</li>
+					<li>Accademia musicae antique la Bacensis, AG Ljubljana, korepetitor 2015–2016</li>
+					<li>C. Monteverdi:  Incoronazione di Poppea, SNG Maribor sezona 2015/2016, asistent dirigenta in korepetitor</li>
+					<li>Accademia musicae antique la Bacensis, AG Ljubljana, korepetitor 2016.</li>
+				</ul>
+			</div>
+			<img src="assets/_branimir_rezic.jpg" alt="BRANIMIR REZIĆ" width="50%" height="100%">
+		</div>
+		<div style="display: flex; justify-content: space-between; flex-direction: row;">
+			<img src="assets/_saso_vollmaier.jpg" alt="SAŠO VOLLMAIER" width="50%" height="100%">
+			<p style="margin-right: 5%; margin-left: 5%; text-align:justify;">
+				<strong>SAŠO VOLLMAIER</strong> (1982) je po končanem študiju na ljubljanski Akademiji za glasbo začel razvijati
+				svoj glasbeni slog, na katerega so vplivale različne skupine, s katerimi je sodeloval (od »komorne« do
+				»alternativne glasbe«). Zadnja leta je aktiven na področju performansa in gledališča. Njegove predstave
+				vključujejo odrsko oblikovanje zvoka z intervencijami giba in izgovorjenih besed.
+				Ustvarja glasbo za plesne in gledališke predstave. <br /><br />
+				Strast do človeškega glasu ga je pripeljala v »Center Artistique International Roy Hart« na jugu Francije, kjer
+				deluje kot pedagog in glasbeni soustvarjalec. Tako pevce kot igralce pripravlja na njihove vloge. Sašo Vollmaier je
+				tudi sodelavec skupine Laibach, s katero je med leti 2007–2013 aktivno sodeloval kot klaviaturist, sedaj pa deluje kot njihov
+				aranžer in studijski glasbenik.<br /><br />
+				Njegova dejavnost v Sloveniji se je vnovič okrepila leta 2020 s sodelovanjem s Cankarjevim domom na 61. Jazz
+				festivalu Ljubljana, kjer je predstavil svoj klavirski solo »Vollmaier: Kind of Laibach«.
+			</p>
+		</div>
+	</section>
+
+	<div id="cenik-navpoint" class="content-divider">
+		<hr>
+	</div>
+
+	<section id="cenik" class="content-80 cenik background-image-2">
+		<h1 class="text-center">PROGRAM IN CENIK</h1>
+		<p>
+			<h3> Glasbena šola – osnovna stopnja</h3>
+			<dl class="">
+				<dt><b>Pripravnica</b> (1×60 minut)</dt>
+				<dd><b>&nbsp;&nbsp;50 €</b> × 10 obrokov </dd>
+				<dt><b>1–3 razred</b> (2×45 minut) klavir + NOG</dt>
+				<dd><b>120 €</b> × 12 obrokov</dd>
+				<dt><b>4–6 razred</b> (2×45 minut) klavir + (1×45 minut) NOG</dt>
+				<dd><b>150 €</b> × 12 obrokov</dd>
+				<dt><b>7–9 razred</b> (2×60 minut) klavir + (1×45 minut) NOG</dt>
+				<dd><b>160 €</b> × 12 obrokov</dd>
+			</dl>
+		<p>
+			Po potrebi in dogovoru dodatne priprave iz glasbenega stavka (skupinske ali individualne).<br />
+			Za vpis v srednjo stopnjo nudimo 8-urni seminar – priprave na sprejemni izpit.
+		</p>
+		<br />
+		<h3> Glasbena šola – srednja stopnja</h3>
+		<dl>
+			<dt>
+				<b>1. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(90 minut) osnova glasbenega izraza in oblikoslovje s harmonsko analizo</dd>
+			<dd><i>Predmet poteka skozi celo leto</i></dd>
+
+			<dt>
+				<b>2. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(60 minut) solfeggio</dd>
+			<dd>(60 minut) zgodovina glasbe in klavirska literatura</dd>
+			<dd>(60 minut) komorna igra</dd>
+			<dd>(60 minut) zbor</dd>
+			<dd><i>Predmeti solfeggio, zgodovina glasbe in klavirska literatura ter komorna igra <br> se izvajajo projektno – vsak od njih traja 5 mesecev.</i></dd>
+
+			<dt>
+				<b>3. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(60 minut) solfeggio</dd>
+			<dd>(60 minut) zgodovina glasbe in klavirska literatura</dd>
+			<dd>(60 minut) komorna igra</dd>
+			<dd>(60 minut) harmonija</dd>
+			<dd>(60 minut) akustika/raziskovanje zvoka</dd>
+			<dd>(60 minut) zbor</dd>
+			<dd><i>Predmeti solfeggio, zgodovina glasbe in klavirska literatura, komorna igra, harmonija in akustika <br> se izvajajo projektno – vsak od njih traja 5 mesecev.</i></dd>
+
+			<dt>
+				<b>4. letnik</b> (3×45 minut) klavir +
+			</dt>
+			<dd>(60 minut) solfeggio</dd>
+			<dd>(60 minut) zgodovina glasbe in klavirska literatura</dd>
+			<dd>(60 minut) komorna igra</dd>
+			<dd>(60 minut) harmonija</dd>
+			<dd><i>Predmeti solfeggio, zgodovina glasbe in klavirska literatura, komorna igra in harmonija <br> se izvajajo projektno – vsak od njih traja 5 mesecev.</i></dd>
+		</dl>
+
+		<aside>
+			<strong>Cena za posamezen letnik je 180 €/na mesec (12 obrokov).</strong><br /><br />
+			<strong>Po potrebi dodatne priprave za sprejemne preizkuse na glasbenih akademijah.</strong>
+		</aside>
+
+
+		<h3>Predavanja v obliki seminarjev</h3>
+
+		<ul>
+			<li>priprava na nastop in umetnost nastopanja</li>
+			<li>meditacija</li>
+			<li>gostujoči profesorji za individualni pouk klavirja</li>
+			<li>teme po potrebi</li>
+		</ul>
+	</section>
+
+	<div id="prijavnica-navpoint" class="content-divider">
+		<hr>
+	</div>
+
+	<section id="prijavnica" class="content-80 background-image-3">
+
+		<h1 class="text-center">PRIJAVNICE</h1>
+		<p>Prosimo vas, da nas za prijavo pokličete na telefon <b>+386 1 438 47 90</b>
+			<br>
+			ali pa nam pošljete e-pošto na naslov <a href="mailto:lotus.cgt@gmail.com">lotus.cgt@gmail.com</a> <br>
+			z zadevo (subject) "Prijavnica" s sledečimi podatki:
+		</p>
+		<h3>PODATKI O UČENCU:</h3>
+		<ul>
+			<li>Ime in priimek</li>
+			<li>Naslov bivališča</li>
+			<li>Datum rojstva</li>
+			<li>EMŠO</li>
+			<li>Osnovna/srednja šola</li>
+			<li>Telefon</li>
+			<li>E-naslov</li>
+		</ul>
+		<h3>PODATKI O PLAČNIKU/KONTAKTNA OSEBA:</h3>
+		<ul>
+			<li>Ime in priimek</li>
+			<li>Naslov bivališča</li>
+			<li>Davčna številka</li>
+			<li>Telefon</li>
+			<li>E-naslov</li>
+		</ul>
+		<p>S pošiljanjem prijavnice na e-naslov ali s prijavo na telefon izjavljate:</p>
+		<ol>
+			<li>da so podani podatki resnični in se strinjate s pogoji poslovanja zavoda LOTUS – Center za glasbene talente,
+				ki so objavljeni na spletnih straneh www.lotus-cgt.si in www.japanpianocenter.si;</li>
+			<li>da boste šolnino poravnali v rokih, ki jih določa šola;</li>
+			<li>da ste seznanjeni s politiko zasebnosti zavoda LOTUS – Center za glasbene talente, ki je objavljena na
+				spletnih straneh www.lotus-cgt.si in www.japanpianocenter.si;</li>
+			<li>da je lahko na vseh prireditvah ali med šolskimi urami, ki jih organizira ali soorganizira zavod LOTUS –
+				Center za glasbene talente, vpisan učenec na fotografijah in posnetkih ter da se dobljeno gradivo uporablja
+				kot arhivsko gradivo zavoda (razmnoževanje filmov in slik), se objavlja na spletni strani in oglasni deski
+				zavoda, prav tako pa se lahko uporabi tudi v promocijske namene zavoda; <br />
+				<i>V kolikor se s 4. točko ne strinjate, nas o tem obvestite ob vpisu.</i></li>
+		</ol>
+	</section>
+
+	<div id="location-navpoint" class="content-divider">
+		<hr>
+	</div>
+
+	<section id="location" class="content-80">
+		<div style="display: flex; justify-content: space-evenly; flex-direction: row;">
+			<div class="margin-lr-20" style="display: flex; justify-content: center; flex-direction: column;">
+				<span class="text-bold">
+					<text>LOTUS – CENTER ZA GLASBENE TALENTE</text>
+					<br>
+					<text>Japan piano center</text>
+					<br>
+					<text>Cesta Ljubljanske brigade 25</text>
+					<br>
+					<text>1000 Ljubljana</text>
+					<br>
+					<br>
+					<table>
+						<tr class="text-bold" style="font-size: larger;">
+							<td style="text-align: center;"><i class="far fa-envelope"></i></td>
+							<td><a href="mailto: lotus.cgt@gmail.com">lotus.cgt@gmail.com</a></td>
+						</tr>
+						<tr class="text-bold" style="font-size: larger;">
+							<td style="text-align: center;"><i class="fas fa-mobile-alt"></i></td>
+							<td><text>+386 1 438 47 90</text></td>
+						</tr>
+					</table>
+				</span>
+			</div>
+			<img style="width: 50vw" src="assets/_glasbena_sola_map.png" alt="Cesta Ljubljanske brigade 25, 1000 Ljubljana" class="clickable" onclick="window.open('https://g.page/japanpianocenter?share', '_blank')">
+		</div>
+	</section>
+
+	<div id="footer-navpoint" class="content-divider">
+		<hr>
+	</div>
+
+	<section id="footer" class="content-100">
+		<div style="display: flex; justify-content: center; flex-direction: row;">
+			<text>&#169 LOTUS - CENTER ZA GLASBENE TALENTE</text>
+		</div>
+	</section>
+
+	<br>
+
+</body>
+
+</html>
